@@ -1,0 +1,20 @@
+#!/bin/python
+
+import fileinput
+import xml.etree.ElementTree as ET
+
+lines = ""
+for line in fileinput.input():
+    lines = lines + line
+
+root = ET.fromstring(lines)
+for child in root[0]:
+    description = ""
+    content = ""
+    for i in child:
+        if i.tag == "description":
+            description = i.text
+        elif i.tag.__contains__("encoded"):
+            i.text = description + i.text
+
+ET.dump(root)
