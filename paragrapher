@@ -15,6 +15,9 @@ for child in root[0]:
         if i.tag == "description":
             description = i.text
         elif i.tag.__contains__("encoded"):
-            i.text = description + i.text
+            try:
+                i.text = description + i.text
+            except:
+                pass
 
 ET.dump(root)
